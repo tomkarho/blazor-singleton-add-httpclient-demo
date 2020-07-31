@@ -19,6 +19,8 @@ namespace AddHttpClientSingletonExample
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddSingleton<ICounterService, CounterService>();
+            builder.Services.AddHttpClient<ICounterService, CounterService>(client =>
+                client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 
             await builder.Build().RunAsync();
         }
