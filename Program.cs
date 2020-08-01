@@ -19,8 +19,9 @@ namespace AddHttpClientSingletonExample
             builder.RootComponents.Add<App>("app");
 
             builder.Services.AddSingleton<ICounterService, CounterService>();
-            builder.Services.AddHttpClient<ICounterService, CounterService>(client =>
-                client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
+            builder.Services.AddSingleton<IhttpFactory, HttpFactory>();
+
+            builder.Services.Configure<HttpOptions>(options => options.BaseUrl = "http://localhost:5000");
 
             await builder.Build().RunAsync();
         }

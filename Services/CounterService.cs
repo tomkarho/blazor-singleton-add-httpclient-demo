@@ -9,10 +9,10 @@ namespace AddHttpClientSingletonExample.Services
         private ILogger<CounterService> _log;
         private int _count = 0;
 
-        public CounterService(ILogger<CounterService> log, HttpClient http)
+        public CounterService(ILogger<CounterService> log, IhttpFactory httpFactory)
         {
             _log = log;
-            _http = http;
+            _http = httpFactory.GetClient();
             _log.LogInformation("CounterService ctor");
         }
 
