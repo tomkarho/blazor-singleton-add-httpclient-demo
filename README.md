@@ -44,3 +44,13 @@ This proves that every time user navigates between two counter pages,
 a new instance of **CounterService** class is created and injected. This is expected
 behaviour for scoped and transient services but not singleton.
 
+## A solution
+One solution to this is to inject HttpClient to singleton services more traditionally: using a factory service that is also a singleton.
+
+Branch 'solution' contains a working example. Pay attention to classes **IHttpFactory**, **HttpOptions**, **HttpFactory** and **Program**.
+
+As an added bonus for using this methodology is that now if you ever need to mock HttpClient to
+provide fake data for example in unit tests, you can do that by mocking the **IHttpFactory** interface.
+
+Note that there already exists within the framework **IHttpClientFactory** which might provide
+the same functionality I created here by hand.
